@@ -464,7 +464,8 @@ const get3Countries = async function(c1, c2, c3){
    // const [data2] = await getJSON(`https://countries.dev/name/${c2}`)
    // const [data3] = await getJSON(`https://countries.dev/name/${c3}`)
   
-   const data =  await Promise.all([getJSON(`https://countries.dev/name/${c1}`),
+   const data =  await Promise.all([
+      getJSON(`https://countries.dev/name/${c1}`),
       getJSON(`https://countries.dev/name/${c2}`), 
       getJSON(`https://countries.dev/name/${c3}`)])
 
@@ -514,14 +515,14 @@ const getJSON = async function(url, errorMsg = 'Something went wrong'){
 //    timeout(1)
 // ]).then(res => console.log(res[0])).catch(err => console.error(err))
 
-// //Promise.allSettled
+//Promise.allSettled
 // Promise.allSettled([
 //    Promise.resolve('Success'),
 //    Promise.reject('Error'),
 //    Promise.resolve('Another success')
 // ]).then(res => console.log(res))
 
-// //Promise.all
+//Promise.all
 // Promise.all([
 //    Promise.resolve('Success'),
 //    Promise.reject('Error'),
@@ -529,7 +530,6 @@ const getJSON = async function(url, errorMsg = 'Something went wrong'){
 // ]).then(res => console.log(res))
 
 // //Promise.any[ES2021]
-
 // Promise.any([
 //    Promise.reject('Error'),
 //    Promise.resolve('Success'),

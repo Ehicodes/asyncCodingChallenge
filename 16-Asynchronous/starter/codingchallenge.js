@@ -132,7 +132,7 @@ const createImage = async function(imgPath) {
     })
 }
 
-
+//PART 1
 const loadNPause = async function(){
     try{
       const img = await createImage('img/img-1.jpg')
@@ -147,9 +147,23 @@ const loadNPause = async function(){
       currentImage = imgThree
       const delayThree = await wait(2) 
       imgThree.style.display = 'none'
+      const closingText = document.createElement('h1')
+      closingText.textContent = 'THAT WILL BE ALL, THANK YOU!!'
+      imgsContainer.append(closingText)
+    }catch(err) {console.error(err)}
+} 
+// loadNPause()
+
+// Part 2
+const loadAll = async function(imgArr) {
+    try{
+      const imgs = imgArr.map(img => createImage(img))
+      console.log(imgs)
+      const resolvedImages = await Promise.all(imgs) 
+      resolvedImages.forEach(ri => {
+        ri.classList.add('parallel')
+    });
+      console.log(resolvedImages)
     }catch(err) {console.error(err)}
 }
-
-
-
-loadNPause()
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'])
