@@ -108,8 +108,6 @@ createImage('img/img-1.jpg')
 // Test data Part 2: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-
 // 3.jpg']. To test, turn off the 'loadNPause' function.
 
-let currentImage;
-
 const imgsContainer = document.querySelector('.images')
 
 const wait = function(seconds) {
@@ -135,18 +133,22 @@ const createImage = async function(imgPath) {
 //PART 1
 const loadNPause = async function(){
     try{
-      const img = await createImage('img/img-1.jpg')
-      currentImage = img
-      const delay = await wait(2)
-      currentImage.style.display = 'none'
-      const imgTwo = await createImage('img/img-2.jpg')
-      currentImage = imgTwo
-      const delayTwo = await wait(2) 
-      currentImage.style.display = 'none'
-      const imgThree = await createImage('img/img-3.jpg')
-      currentImage = imgThree
-      const delayThree = await wait(2) 
-      imgThree.style.display = 'none'
+      //load and hide image 1
+      let img = await createImage('img/img-1.jpg')
+      await wait(2)
+      img.style.display = 'none'
+
+      //load and hide image 2
+       img = await createImage('img/img-2.jpg')
+      await wait(2) 
+      img.style.display = 'none'
+
+      //load and hide image 3
+       img = await createImage('img/img-3.jpg')
+      await wait(2) 
+      img.style.display = 'none'
+
+      //display closing text
       const closingText = document.createElement('h1')
       closingText.textContent = 'THAT WILL BE ALL, THANK YOU!!'
       imgsContainer.append(closingText)
@@ -157,8 +159,7 @@ const loadNPause = async function(){
 // Part 2
 const loadAll = async function(imgArr) {
     try{
-      const imgs = imgArr.map(img => createImage(img))
-      console.log(imgs)
+      const imgs = imgArr.map(async img => await createImage(img))
       const resolvedImages = await Promise.all(imgs) 
       resolvedImages.forEach(ri => {
         ri.classList.add('parallel')
